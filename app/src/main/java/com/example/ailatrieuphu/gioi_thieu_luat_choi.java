@@ -20,6 +20,7 @@ public class gioi_thieu_luat_choi extends AppCompatActivity {
         onInit();
     }
     public void onInit() {
+        player.destoryAll();
         player.GioiThieuLuatChoi();
         startPlay = findViewById(R.id.btnReady);
         txtShow = findViewById(R.id.textView5);

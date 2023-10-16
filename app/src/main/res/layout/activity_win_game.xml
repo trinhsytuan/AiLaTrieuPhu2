@@ -12,12 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="248dp"
         android:gravity="center"
         android:text="Thắng cuộc"
         android:textColor="#ffffff"
-        android:textSize="50dp"
         android:textFontWeight="@integer/material_motion_duration_long_1"
+        android:textSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,33 +25,51 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="177dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="160dp"
         android:text="VND"
         android:textColor="#ffffff"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="127dp"
-        android:text="TextView"
-        android:textColor="#ffffff"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <Button
         android:id="@+id/btnRePlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="69dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="32dp"
         android:text="Chơi lại"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+        <TextView
+            android:id="@+id/tien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="TextView"
+
+            android:textColor="#ffffff"
+            android:textSize="30dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="336dp"
+        android:layout_height="213dp"
+        app:srcCompat="@drawable/logo_trieu_phu"
+        tools:layout_editor_absoluteX="49dp"
+        tools:layout_editor_absoluteY="6dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

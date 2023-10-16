@@ -108,6 +108,14 @@ public class SoundPlayer {
             playNen.start();
         }
     }
+    public void bestPlayer() {
+        MediaPlayer best = MediaPlayer.create(context, R.raw.best_player);
+        best.start();
+    }
+    public void thuacuoc() {
+        MediaPlayer thuacuocs = MediaPlayer.create(context, R.raw.lose);
+        thuacuocs.start();
+    }
 
     public void destoryAll() {
         if (mediaPlayer != null) {

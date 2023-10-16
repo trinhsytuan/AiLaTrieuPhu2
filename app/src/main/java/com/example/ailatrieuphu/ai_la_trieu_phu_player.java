@@ -119,7 +119,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         if (dapan == 4) dapand.setBackgroundResource(R.drawable.player_answer_background_true);
         soundAnswer.correctAnswer(dan, cauhoi);
         if(cauhoi == 15) {
-            tambiet();
+            tambietluon();
         }
     }
     public void resetButton() {
@@ -171,6 +171,16 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         getCauHoi();
     }
     public void tambiet() {
+        player.destoryAll();
+        int newCauHoi = 0;
+        if(cauhoi > 6 && cauhoi <= 10) newCauHoi = 5;
+        if(cauhoi >= 11 && cauhoi < 14) newCauHoi = 10;
+        Intent intent = new Intent(this, WinGame.class);
+        intent.putExtra("cauhoi", newCauHoi);
+        startActivity(intent);
+    }
+    public void tambietluon() {
+        player.destoryAll();
         Intent intent = new Intent(this, WinGame.class);
         intent.putExtra("cauhoi", cauhoi);
         startActivity(intent);
