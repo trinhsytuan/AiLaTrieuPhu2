@@ -74,6 +74,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         else if (R.id.dapand == view.getId()) xuLyCauHoi("d");
         else if (R.id.btnStopPlayer == view.getId()) tambietluon();
         else if(R.id.helpDoiCauHoi == view.getId()) doicauhoi();
+        else if(R.id.help5050 == view.getId()) soundAnswer.trogiup5050();
     }
 
     public void xuLyCauHoi(String da) {
@@ -137,10 +138,15 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         dapanb.setBackgroundResource(R.drawable.btn_answer);
         dapanc.setBackgroundResource(R.drawable.btn_answer);
         dapand.setBackgroundResource(R.drawable.btn_answer);
+        dapana.setVisibility(View.VISIBLE);
+        dapanb.setVisibility(View.VISIBLE);
+        dapanc.setVisibility(View.VISIBLE);
+        dapand.setVisibility(View.VISIBLE);
         dapana.setActivated(false);
         dapanb.setActivated(false);
         dapanc.setActivated(false);
         dapand.setActivated(false);
+
         traloi = true;
     }
 
@@ -247,6 +253,19 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+    public void trogiup5050() {
+        int correctAnswer = ch.getTruecase();
+        int dem = 0;
+        for(int i = 1; i <= 4;i++) {
+            if(i == correctAnswer) continue;
+            if(dem == 2) break;
+            if(i == 1) dapana.setVisibility(View.INVISIBLE);
+            if(i == 2) dapanb.setVisibility(View.INVISIBLE);
+            if(i == 3) dapanc.setVisibility(View.INVISIBLE);
+            if(i == 4) dapand.setVisibility(View.INVISIBLE);
+            dem++;
+        }
     }
 }
 

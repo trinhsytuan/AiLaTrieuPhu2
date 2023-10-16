@@ -112,4 +112,14 @@ public class SoundAnswer {
             }
         });
     }
+    public void trogiup5050() {
+        MediaPlayer trogiup = MediaPlayer.create(context, R.raw.sound5050);
+        trogiup.start();
+        trogiup.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                player.trogiup5050();
+            }
+        });
+    }
 }
