@@ -62,6 +62,12 @@ public class SoundAnswer {
         int resID = context.getResources().getIdentifier(resourceName, "raw", context.getPackageName());
         MediaPlayer dapanSound = MediaPlayer.create(context, resID);
         dapanSound.start();
+        dapanSound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                player.tambiet();
+            }
+        });
     }
 
     public void correctAnswer(String dapan, int cauhoi) {
@@ -83,6 +89,26 @@ public class SoundAnswer {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 player.startCau6();
+            }
+        });
+    }
+    public void vuotquacau10() {
+        MediaPlayer playcauhoiso5 = MediaPlayer.create(context, R.raw.chuc_mung_vuot_moc_02_0);
+        playcauhoiso5.start();
+        playcauhoiso5.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                player.startCau11();
+            }
+        });
+    }
+    public void cau15() {
+        MediaPlayer important = MediaPlayer.create(context, R.raw.important);
+        important.start();
+        important.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                player.startCau15();
             }
         });
     }

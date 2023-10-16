@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AiLaTrieuPhu"
         tools:targetApi="31">
         <activity
+            android:name=".WinGame"
+            android:exported="false" />
+        <activity
             android:name=".gioi_thieu_luat_choi"
             android:exported="false" />
         <activity

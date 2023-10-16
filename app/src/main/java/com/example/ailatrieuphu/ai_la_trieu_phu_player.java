@@ -2,6 +2,7 @@ package com.example.ailatrieuphu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -117,6 +118,9 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         if (dapan == 3) dapanc.setBackgroundResource(R.drawable.player_answer_background_true);
         if (dapan == 4) dapand.setBackgroundResource(R.drawable.player_answer_background_true);
         soundAnswer.correctAnswer(dan, cauhoi);
+        if(cauhoi == 15) {
+            tambiet();
+        }
     }
     public void resetButton() {
         dapana.setBackgroundResource(R.drawable.btn_answer);
@@ -135,9 +139,9 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         if(cauhoi == 6) {
             soundAnswer.cauhoiso5();
         } else if(cauhoi == 11) {
-
+            soundAnswer.vuotquacau10();
         } else if(cauhoi == 15) {
-
+            soundAnswer.cau15();
         }
         else {
             player.startNen();
@@ -151,10 +155,25 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         if (dapan == 3) dapanc.setBackgroundResource(R.drawable.player_answer_background_wrong);
         if (dapan == 4) dapand.setBackgroundResource(R.drawable.player_answer_background_wrong);
         soundAnswer.wrongAnswer(ch.getTruecase());
+
     }
     public void startCau6() {
         player.playNhac6den9();
         getCauHoi();
+    }
+
+    public void startCau11() {
+        player.playNhac10den15();
+        getCauHoi();
+    }
+    public void startCau15() {
+        player.startNen();
+        getCauHoi();
+    }
+    public void tambiet() {
+        Intent intent = new Intent(this, WinGame.class);
+        intent.putExtra("cauhoi", cauhoi);
+        startActivity(intent);
     }
 
     @Override
