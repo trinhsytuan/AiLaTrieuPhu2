@@ -45,4 +45,9 @@ public class gioi_thieu_luat_choi extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        player.destoryAll();
+    }
 }
