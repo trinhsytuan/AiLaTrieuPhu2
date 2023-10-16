@@ -129,6 +129,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         if (dapan == 4) dapand.setBackgroundResource(R.drawable.player_answer_background_true);
         soundAnswer.correctAnswer(dan, cauhoi);
         if (cauhoi == 15) {
+            cauhoi = 16;
             tambietluon();
         }
     }
@@ -224,7 +225,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     }
 
     public void doicauhoi() {
-        if (changeQuestion == true) {
+        if (changeQuestion == true && traloi == true) {
             btnChangeQuestion.setImageResource(R.drawable.player_button_image_help_change_question_x);
             changeQuestion = false;
             getCauHoi();
@@ -258,7 +259,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     }
 
     public void help5050() {
-        if (nammuoi == true) {
+        if (nammuoi == true && traloi == true) {
             soundAnswer.trogiup5050();
             btn5050.setImageResource(R.drawable.player_button_image_help_5050_x);
             nammuoi = false;
