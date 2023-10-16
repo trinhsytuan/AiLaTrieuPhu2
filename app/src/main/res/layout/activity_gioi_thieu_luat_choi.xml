@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginTop="13dp"
-        android:text="Có 3 quyền trợ giúp, từ câu thứ 6 sẽ có 4 quyền"
+        android:text="Có 4 quyền trợ giúp"
         android:textColor="#ffffff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />

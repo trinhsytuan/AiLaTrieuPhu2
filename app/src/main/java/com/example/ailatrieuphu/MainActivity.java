@@ -58,12 +58,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        soundPlayer.release();
+        soundPlayer.destoryAll();
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        soundPlayer.startAltp();
+    protected void onPause() {
+        super.onPause();
+        soundPlayer.destoryAll();
     }
+
+
 }

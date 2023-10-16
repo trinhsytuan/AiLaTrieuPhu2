@@ -1,7 +1,9 @@
 package com.example.ailatrieuphu;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,12 +20,14 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     ImageView btnHelpCall, btnChangeQuestion, btn5050, btnAudience;
     QuestionDao dao;
     TextView questions;
-    Button dapana, dapanb, dapanc, dapand;
+    Button dapana, dapanb, dapanc, dapand, stopPlayer;
     QuestionModel ch;
     TextView cauhoithu;
     int cauhoi = 1;
-    String dan = "";
     boolean traloi = true;
+
+    String dan = "";
+    boolean nammuoi = true, goi = true, khangia = true, changeQuestion = true;
     SoundAnswer soundAnswer = new SoundAnswer(this, this);
     SoundPlayer player = new SoundPlayer(this);
 
@@ -47,6 +51,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         dapanc = findViewById(R.id.dapanc);
         dapand = findViewById(R.id.dapand);
         cauhoithu = findViewById(R.id.cauhoi);
+        stopPlayer = findViewById(R.id.btnStopPlayer);
         btnHelpCall.setOnClickListener(this);
         btnChangeQuestion.setOnClickListener(this);
         btn5050.setOnClickListener(this);
@@ -55,6 +60,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         dapanb.setOnClickListener(this);
         dapanc.setOnClickListener(this);
         dapand.setOnClickListener(this);
+        stopPlayer.setOnClickListener(this);
         getCauHoi();
 
     }
@@ -66,6 +72,8 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         else if (R.id.dapanb == view.getId()) xuLyCauHoi("b");
         else if (R.id.dapanc == view.getId()) xuLyCauHoi("c");
         else if (R.id.dapand == view.getId()) xuLyCauHoi("d");
+        else if (R.id.btnStopPlayer == view.getId()) tambietluon();
+        else if(R.id.helpDoiCauHoi == view.getId()) doicauhoi();
     }
 
     public void xuLyCauHoi(String da) {
@@ -89,6 +97,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     }
 
     public void getCauHoi() {
+        resetButton();
         cauhoithu.setText(String.valueOf(cauhoi));
         player.nhaccauhoi(cauhoi);
         ch = dao.getQuestion(cauhoi);
@@ -118,10 +127,11 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         if (dapan == 3) dapanc.setBackgroundResource(R.drawable.player_answer_background_true);
         if (dapan == 4) dapand.setBackgroundResource(R.drawable.player_answer_background_true);
         soundAnswer.correctAnswer(dan, cauhoi);
-        if(cauhoi == 15) {
+        if (cauhoi == 15) {
             tambietluon();
         }
     }
+
     public void resetButton() {
         dapana.setBackgroundResource(R.drawable.btn_answer);
         dapanb.setBackgroundResource(R.drawable.btn_answer);
@@ -133,17 +143,17 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         dapand.setActivated(false);
         traloi = true;
     }
+
     public void chuyencauhoi() {
-        if(cauhoi < 15) cauhoi++;
-        resetButton();
-        if(cauhoi == 6) {
+        if (cauhoi < 15) cauhoi++;
+
+        if (cauhoi == 6) {
             soundAnswer.cauhoiso5();
-        } else if(cauhoi == 11) {
+        } else if (cauhoi == 11) {
             soundAnswer.vuotquacau10();
-        } else if(cauhoi == 15) {
+        } else if (cauhoi == 15) {
             soundAnswer.cau15();
-        }
-        else {
+        } else {
             player.startNen();
             getCauHoi();
         }
@@ -157,6 +167,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         soundAnswer.wrongAnswer(ch.getTruecase());
 
     }
+
     public void startCau6() {
         player.playNhac6den9();
         getCauHoi();
@@ -166,23 +177,27 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         player.playNhac10den15();
         getCauHoi();
     }
+
     public void startCau15() {
         player.startNen();
         getCauHoi();
     }
+
     public void tambiet() {
         player.destoryAll();
         int newCauHoi = 0;
-        if(cauhoi > 6 && cauhoi <= 10) newCauHoi = 5;
-        if(cauhoi >= 11 && cauhoi < 14) newCauHoi = 10;
+        cauhoi--;
+        if (cauhoi > 6 && cauhoi <= 10) newCauHoi = 5;
+        if (cauhoi >= 11 && cauhoi < 14) newCauHoi = 10;
         Intent intent = new Intent(this, WinGame.class);
         intent.putExtra("cauhoi", newCauHoi);
         startActivity(intent);
     }
+
     public void tambietluon() {
         player.destoryAll();
         Intent intent = new Intent(this, WinGame.class);
-        intent.putExtra("cauhoi", cauhoi);
+        intent.putExtra("cauhoi", cauhoi-1);
         startActivity(intent);
     }
 
@@ -197,4 +212,43 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         super.onResume();
         player.startNen();
     }
+    public void onBackPressed() {
+        showExitConfirmationDialog();
+    }
+    public void doicauhoi() {
+        if(changeQuestion == true) {
+            btnChangeQuestion.setImageResource(R.drawable.player_button_image_help_change_question_x);
+            changeQuestion = false;
+            getCauHoi();
+            player.startNen();
+
+        }
+    }
+
+    private void showExitConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Xác nhận thoát");
+        builder.setMessage("Bạn có muốn dừng cuộc chơi ?");
+
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Khi người dùng chọn "Có", thoát khỏi ứng dụng
+                tambietluon();
+            }
+        });
+
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }
+
+
+

@@ -68,8 +68,10 @@
         android:id="@+id/imageView3"
         android:layout_width="336dp"
         android:layout_height="213dp"
-        app:srcCompat="@drawable/logo_trieu_phu"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="6dp" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_trieu_phu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
