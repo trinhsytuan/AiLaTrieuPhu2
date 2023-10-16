@@ -2,6 +2,7 @@ package com.example.ailatrieuphu;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
 
 public class SoundPlayer {
     private MediaPlayer mediaPlayer;
@@ -21,6 +22,7 @@ public class SoundPlayer {
             mediaPlayer.start();
         }
     }
+
     public void GioiThieuLuatChoi() {
         mediaPlayer = MediaPlayer.create(context, R.raw.luatchoi_b);
 
@@ -40,7 +42,7 @@ public class SoundPlayer {
 
 
     public void stopMediaPlayer() {
-        if(mediaPlayer.isPlaying()) {
+        if (mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
         }
     }
@@ -51,6 +53,7 @@ public class SoundPlayer {
             mediaPlayer = null;
         }
     }
+
     public void playNhac1den5() {
 
         playNen = MediaPlayer.create(context, R.raw.background_music);
@@ -61,6 +64,7 @@ public class SoundPlayer {
             playNen.start();
         }
     }
+
     public void playNhac6den9() {
         playNen = MediaPlayer.create(context, R.raw.background_music_b);
         playNen.setLooping(true);
@@ -70,6 +74,7 @@ public class SoundPlayer {
             playNen.start();
         }
     }
+
     public void playNhac10den15() {
         playNen = MediaPlayer.create(context, R.raw.background_music_c);
         playNen.setLooping(true);
@@ -79,23 +84,31 @@ public class SoundPlayer {
             playNen.start();
         }
     }
+
     public void nhaccauhoi(int id) {
         String resourceName = "ques" + id;
         int resID = context.getResources().getIdentifier(resourceName, "raw", context.getPackageName());
         cauhoi = MediaPlayer.create(context, resID);
 
-        if(cauhoi.isPlaying()) {
+        if (cauhoi.isPlaying()) {
             cauhoi.pause();
-        }
-        else{
+        } else {
             cauhoi.start();
         }
     }
+
     public void stopNen() {
         if (playNen != null) {
-            playNen.stop();
+            playNen.pause();
         }
     }
+
+    public void startNen() {
+        if (playNen != null) {
+            playNen.start();
+        }
+    }
+
     public void destoryAll() {
         if (mediaPlayer != null) {
             mediaPlayer.release();
@@ -106,9 +119,9 @@ public class SoundPlayer {
             cauhoi = null;
         }
         if (playNen != null) {
-            playNen.release();
-            playNen = null;
+            playNen.pause();
         }
 
     }
+
 }

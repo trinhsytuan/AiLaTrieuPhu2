@@ -19,6 +19,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     TextView questions;
     Button dapana, dapanb, dapanc, dapand;
     QuestionModel ch;
+    TextView cauhoithu;
     int cauhoi = 1;
     String dan = "";
     boolean traloi = true;
@@ -44,6 +45,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         dapanb = findViewById(R.id.dapanb);
         dapanc = findViewById(R.id.dapanc);
         dapand = findViewById(R.id.dapand);
+        cauhoithu = findViewById(R.id.cauhoi);
         btnHelpCall.setOnClickListener(this);
         btnChangeQuestion.setOnClickListener(this);
         btn5050.setOnClickListener(this);
@@ -78,14 +80,15 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     public void activeQuestion(String da) {
         if (da.equals("a")) dapana.setActivated(true);
         if (da.equals("b")) dapanb.setActivated(true);
-        ;
+
         if (da.equals("c")) dapanc.setActivated(true);
-        ;
+
         if (da.equals("d")) dapand.setActivated(true);
-        ;
+
     }
 
     public void getCauHoi() {
+        cauhoithu.setText(String.valueOf(cauhoi));
         player.nhaccauhoi(cauhoi);
         ch = dao.getQuestion(cauhoi);
         questions.setText(ch.getQuestion());
@@ -113,8 +116,33 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         if (dapan == 2) dapanb.setBackgroundResource(R.drawable.player_answer_background_true);
         if (dapan == 3) dapanc.setBackgroundResource(R.drawable.player_answer_background_true);
         if (dapan == 4) dapand.setBackgroundResource(R.drawable.player_answer_background_true);
-        soundAnswer.correctAnswer(dan);
+        soundAnswer.correctAnswer(dan, cauhoi);
+    }
+    public void resetButton() {
+        dapana.setBackgroundResource(R.drawable.btn_answer);
+        dapanb.setBackgroundResource(R.drawable.btn_answer);
+        dapanc.setBackgroundResource(R.drawable.btn_answer);
+        dapand.setBackgroundResource(R.drawable.btn_answer);
+        dapana.setActivated(false);
+        dapanb.setActivated(false);
+        dapanc.setActivated(false);
+        dapand.setActivated(false);
+        traloi = true;
+    }
+    public void chuyencauhoi() {
+        if(cauhoi < 15) cauhoi++;
+        resetButton();
+        if(cauhoi == 6) {
+            soundAnswer.cauhoiso5();
+        } else if(cauhoi == 11) {
 
+        } else if(cauhoi == 15) {
+
+        }
+        else {
+            player.startNen();
+            getCauHoi();
+        }
     }
 
     public void dapansai(int dapan) {
@@ -124,10 +152,20 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         if (dapan == 4) dapand.setBackgroundResource(R.drawable.player_answer_background_wrong);
         soundAnswer.wrongAnswer(ch.getTruecase());
     }
+    public void startCau6() {
+        player.playNhac6den9();
+        getCauHoi();
+    }
 
     @Override
     protected void onPause() {
         super.onPause();
         player.destoryAll();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        player.startNen();
     }
 }
