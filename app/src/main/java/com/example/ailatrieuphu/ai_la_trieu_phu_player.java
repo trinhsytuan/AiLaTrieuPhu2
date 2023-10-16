@@ -74,7 +74,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         else if (R.id.dapand == view.getId()) xuLyCauHoi("d");
         else if (R.id.btnStopPlayer == view.getId()) tambietluon();
         else if (R.id.helpDoiCauHoi == view.getId()) doicauhoi();
-        else if (R.id.help5050 == view.getId()) soundAnswer.trogiup5050();
+        else if (R.id.help5050 == view.getId()) help5050();
     }
 
     public void xuLyCauHoi(String da) {
@@ -257,22 +257,29 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         dialog.show();
     }
 
-    public void trogiup5050() {
+    public void help5050() {
         if (nammuoi == true) {
-            int correctAnswer = ch.getTruecase();
-            int dem = 0;
-            for (int i = 1; i <= 4; i++) {
-                if (i == correctAnswer) continue;
-                if (dem == 2) break;
-                if (i == 1) dapana.setVisibility(View.INVISIBLE);
-                if (i == 2) dapanb.setVisibility(View.INVISIBLE);
-                if (i == 3) dapanc.setVisibility(View.INVISIBLE);
-                if (i == 4) dapand.setVisibility(View.INVISIBLE);
-                dem++;
-            }
+            soundAnswer.trogiup5050();
             btn5050.setImageResource(R.drawable.player_button_image_help_5050_x);
             nammuoi = false;
         }
+    }
+
+    public void trogiup5050() {
+
+        int correctAnswer = ch.getTruecase();
+        int dem = 0;
+        for (int i = 1; i <= 4; i++) {
+            if (i == correctAnswer) continue;
+            if (dem == 2) break;
+            if (i == 1) dapana.setVisibility(View.INVISIBLE);
+            if (i == 2) dapanb.setVisibility(View.INVISIBLE);
+            if (i == 3) dapanc.setVisibility(View.INVISIBLE);
+            if (i == 4) dapand.setVisibility(View.INVISIBLE);
+            dem++;
+        }
+
+
     }
 }
 
