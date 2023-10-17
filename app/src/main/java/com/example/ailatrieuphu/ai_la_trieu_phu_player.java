@@ -32,6 +32,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     String dan = "";
     boolean nammuoi = true, goi = true, khangia = true, changeQuestion = true;
     SoundAnswer soundAnswer = new SoundAnswer(this, this);
+    AlertDialog dialogkg;
     SoundPlayer player = new SoundPlayer(this);
 
     @Override
@@ -55,11 +56,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         dapand = findViewById(R.id.dapand);
         cauhoithu = findViewById(R.id.cauhoi);
         stopPlayer = findViewById(R.id.btnStopPlayer);
-        khangiaa = findViewById(R.id.trogiupa);
-        khangiab = findViewById(R.id.trogiupb);
-        khangiac = findViewById(R.id.trogiupc);
-        khangiad = findViewById(R.id.trogiupd);
-        closeDialogKhanGia = findViewById(R.id.btnDongTroGiupKhanGia);
+
         btnHelpCall.setOnClickListener(this);
         btnChangeQuestion.setOnClickListener(this);
         btn5050.setOnClickListener(this);
@@ -69,6 +66,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         dapanc.setOnClickListener(this);
         dapand.setOnClickListener(this);
         stopPlayer.setOnClickListener(this);
+
         getCauHoi();
 
     }
@@ -85,6 +83,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         else if (R.id.help5050 == view.getId()) help5050();
         else if (R.id.helpCall == view.getId()) goidienthoai();
         else if (R.id.helpKhanGia == view.getId()) openHelpKhanGia();
+
     }
 
     public void xuLyCauHoi(String da) {
@@ -95,6 +94,9 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
             soundAnswer.xuLyCauHoi(da);
 
         }
+    }
+    public void dongKhanGia() {
+        dialogkg.dismiss();
     }
 
     public void activeQuestion(String da) {
@@ -335,11 +337,18 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
             int trueCase = ch.getTruecase();
             int[] phantram = {14, 13, 15, 8};
             LayoutInflater inflater = getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.layout_help_tp, null);
+            View dialogView = inflater.inflate(R.layout.activity_custom_khan_gia, null);
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setView(dialogView);
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            dialogkg = builder.create();
+            dialogkg.show();
+            khangiaa = findViewById(R.id.trogiupa);
+            khangiab = findViewById(R.id.trogiupb);
+            khangiac = findViewById(R.id.trogiupc);
+            khangiad = findViewById(R.id.trogiupd);
+            khangiaa.setVisibility(View.INVISIBLE);
+
+            closeDialogKhanGia = findViewById(R.id.btnDongTroGiupKhanGia);
 
             if (q5050 == cauhoi) {
                 Log.e("Runnnn", "OK");
@@ -360,13 +369,14 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
             } else {
 
             }
-
             closeDialogKhanGia.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    dialog.dismiss();
+                    dongKhanGia();
                 }
             });
+
+
         } catch (Exception ex) {
             ex.getMessage();
         }
