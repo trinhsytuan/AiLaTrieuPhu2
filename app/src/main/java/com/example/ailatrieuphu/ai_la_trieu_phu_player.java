@@ -75,6 +75,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         else if (R.id.btnStopPlayer == view.getId()) tambietluon();
         else if (R.id.helpDoiCauHoi == view.getId()) doicauhoi();
         else if (R.id.help5050 == view.getId()) help5050();
+        else if(R.id.helpCall == view.getId()) goidienthoai();
     }
 
     public void xuLyCauHoi(String da) {
@@ -193,9 +194,8 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     public void tambiet() {
         player.destoryAll();
         int newCauHoi = 0;
-        cauhoi--;
-        if (cauhoi > 6 && cauhoi <= 10) newCauHoi = 5;
-        if (cauhoi >= 11 && cauhoi < 14) newCauHoi = 10;
+        if (cauhoi >= 6 && cauhoi <= 11) newCauHoi = 5;
+        if (cauhoi >= 12 && cauhoi < 14) newCauHoi = 10;
         Intent intent = new Intent(this, WinGame.class);
         intent.putExtra("cauhoi", newCauHoi);
         startActivity(intent);
@@ -233,6 +233,13 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
 
         }
     }
+    public void goidienthoai() {
+        if(goi == true && traloi == true) {
+            goi = false;
+            btnHelpCall.setImageResource(R.drawable.player_button_image_help_call_x);
+            soundAnswer.helpCall();
+        }
+    }
 
     private void showExitConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -248,9 +255,27 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
 
         builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-
                 dialog.dismiss();
+            }
+        });
 
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    public void helpCall() {
+        String answer = "";
+        int daTrue = ch.getTruecase();
+        if(daTrue == 1) answer = "A";
+        if(daTrue == 2) answer = "B";
+        if(daTrue == 3) answer = "C";
+        if(daTrue == 4) answer = "D";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Gọi điện thoại");
+        builder.setMessage("Bạn của bạn tư vấn cho bạn đáp án: "+ answer);
+
+        builder.setNegativeButton("Đóng", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
 
@@ -279,8 +304,6 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
             if (i == 4) dapand.setVisibility(View.INVISIBLE);
             dem++;
         }
-
-
     }
 }
 

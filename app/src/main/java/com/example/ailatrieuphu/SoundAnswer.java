@@ -122,4 +122,14 @@ public class SoundAnswer {
             }
         });
     }
+    public void helpCall() {
+        MediaPlayer trogiup = MediaPlayer.create(context, R.raw.help_call);
+        trogiup.start();
+        trogiup.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                player.helpCall();
+            }
+        });
+    }
 }
