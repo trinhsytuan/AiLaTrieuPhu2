@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +26,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     Button closeDialogKhanGia;
     QuestionModel ch;
     TextView cauhoithu;
-    int cauhoi = 1;
+    int cauhoi = 1, q5050 = 0;
     boolean traloi = true;
 
     String dan = "";
@@ -58,6 +59,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         khangiab = findViewById(R.id.trogiupb);
         khangiac = findViewById(R.id.trogiupc);
         khangiad = findViewById(R.id.trogiupd);
+        closeDialogKhanGia = findViewById(R.id.btnDongTroGiupKhanGia);
         btnHelpCall.setOnClickListener(this);
         btnChangeQuestion.setOnClickListener(this);
         btn5050.setOnClickListener(this);
@@ -297,6 +299,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     public void help5050() {
         if (nammuoi == true && traloi == true) {
             soundAnswer.trogiup5050();
+            q5050 = cauhoi;
             btn5050.setImageResource(R.drawable.player_button_image_help_5050_x);
             nammuoi = false;
         }
@@ -326,7 +329,48 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     }
 
     public void helpKhanGia() {
-        player.startNen();
+        try {
+
+            player.startNen();
+            int trueCase = ch.getTruecase();
+            int[] phantram = {14, 13, 15, 8};
+            LayoutInflater inflater = getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.layout_help_tp, null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setView(dialogView);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            if (q5050 == cauhoi) {
+                Log.e("Runnnn", "OK");
+                for (int i = 0; i < 4; i++) phantram[i] = 22;
+                phantram[trueCase] += 56;
+                if (dapana.getVisibility() == View.VISIBLE)
+                    khangiaa.setText("A: " + phantram[0] + " %");
+                else khangiaa.setVisibility(View.GONE);
+                if (dapanb.getVisibility() == View.VISIBLE)
+                    khangiab.setText("B: " + phantram[1] + " %");
+                else khangiab.setVisibility(View.GONE);
+                if (dapanc.getVisibility() == View.VISIBLE)
+                    khangiac.setText("C: " + phantram[2] + " %");
+                else khangiac.setVisibility(View.GONE);
+                if (dapand.getVisibility() == View.VISIBLE)
+                    khangiad.setText("D: " + phantram[3] + " %");
+                else khangiad.setVisibility(View.GONE);
+            } else {
+
+            }
+
+            closeDialogKhanGia.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+
     }
 }
 

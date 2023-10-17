@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AiLaTrieuPhu"
         tools:targetApi="31">
         <activity
+            android:name=".custom_khan_gia"
+            android:exported="false" />
+        <activity
             android:name=".WinGame"
             android:exported="false" />
         <activity
