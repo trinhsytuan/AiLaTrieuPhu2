@@ -82,6 +82,7 @@
             <Button
                 android:id="@+id/dapana"
                 android:layout_width="wrap_content"
+                android:textAllCaps="false"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/btn_answer"
@@ -93,6 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textAllCaps="false"
                 android:background="@drawable/btn_answer"
                 android:text="Button"
                 android:textColor="#ffffff" />
@@ -102,6 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textAllCaps="false"
                 android:background="@drawable/btn_answer"
                 android:text="Button"
                 android:textColor="#ffffff" />
@@ -111,6 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textAllCaps="false"
                 android:background="@drawable/btn_answer"
                 android:text="Button"
                 android:textColor="#ffffff" />
