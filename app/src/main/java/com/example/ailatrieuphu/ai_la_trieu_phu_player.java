@@ -335,7 +335,7 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
 
             player.startNen();
             int trueCase = ch.getTruecase();
-            int[] phantram = {14, 13, 15, 8};
+            int[] phantram = {0, 14, 13, 15, 8};
             LayoutInflater inflater = getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.activity_custom_khan_gia, null);
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -348,26 +348,27 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
             khangiad = dialogView.findViewById(R.id.trogiupd);
             closeDialogKhanGia = dialogView.findViewById(R.id.btnDongTroGiupKhanGia);
             if (q5050 == cauhoi) {
-                for (int i = 0; i < 4; i++) phantram[i] = 22;
+                Log.d("OK", "OK r nha");
+                for (int i = 1; i <= 4; i++) phantram[i] = 22;
                 phantram[trueCase] += 56;
                 if (dapana.getVisibility() == View.VISIBLE)
-                    khangiaa.setText("A: " + phantram[0] + " %");
+                    khangiaa.setText("A: " + phantram[1] + " %");
                 else khangiaa.setVisibility(View.GONE);
                 if (dapanb.getVisibility() == View.VISIBLE)
-                    khangiab.setText("B: " + phantram[1] + " %");
+                    khangiab.setText("B: " + phantram[2] + " %");
                 else khangiab.setVisibility(View.GONE);
                 if (dapanc.getVisibility() == View.VISIBLE)
-                    khangiac.setText("C: " + phantram[2] + " %");
+                    khangiac.setText("C: " + phantram[3] + " %");
                 else khangiac.setVisibility(View.GONE);
                 if (dapand.getVisibility() == View.VISIBLE)
-                    khangiad.setText("D: " + phantram[3] + " %");
+                    khangiad.setText("D: " + phantram[4] + " %");
                 else khangiad.setVisibility(View.GONE);
             } else {
                 phantram[trueCase] += 50;
-                khangiaa.setText("A: " + phantram[0] + " %");
-                khangiab.setText("B: " + phantram[1] + " %");
-                khangiac.setText("C: " + phantram[2] + " %");
-                khangiad.setText("D: " + phantram[3] + " %");
+                khangiaa.setText("A: " + phantram[1] + " %");
+                khangiab.setText("B: " + phantram[2] + " %");
+                khangiac.setText("C: " + phantram[3] + " %");
+                khangiad.setText("D: " + phantram[4] + " %");
             }
             closeDialogKhanGia.setOnClickListener(new View.OnClickListener() {
                 @Override
