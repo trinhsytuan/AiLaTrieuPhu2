@@ -342,16 +342,12 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
             builder.setView(dialogView);
             dialogkg = builder.create();
             dialogkg.show();
-            khangiaa = findViewById(R.id.trogiupa);
-            khangiab = findViewById(R.id.trogiupb);
-            khangiac = findViewById(R.id.trogiupc);
-            khangiad = findViewById(R.id.trogiupd);
-            khangiaa.setVisibility(View.INVISIBLE);
-
-            closeDialogKhanGia = findViewById(R.id.btnDongTroGiupKhanGia);
-
+            khangiaa = dialogView.findViewById(R.id.trogiupa);
+            khangiab = dialogView.findViewById(R.id.trogiupb);
+            khangiac = dialogView.findViewById(R.id.trogiupc);
+            khangiad = dialogView.findViewById(R.id.trogiupd);
+            closeDialogKhanGia = dialogView.findViewById(R.id.btnDongTroGiupKhanGia);
             if (q5050 == cauhoi) {
-                Log.e("Runnnn", "OK");
                 for (int i = 0; i < 4; i++) phantram[i] = 22;
                 phantram[trueCase] += 56;
                 if (dapana.getVisibility() == View.VISIBLE)
@@ -367,7 +363,11 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
                     khangiad.setText("D: " + phantram[3] + " %");
                 else khangiad.setVisibility(View.GONE);
             } else {
-
+                phantram[trueCase] += 50;
+                khangiaa.setText("A: " + phantram[0] + " %");
+                khangiab.setText("B: " + phantram[1] + " %");
+                khangiac.setText("C: " + phantram[2] + " %");
+                khangiad.setText("D: " + phantram[3] + " %");
             }
             closeDialogKhanGia.setOnClickListener(new View.OnClickListener() {
                 @Override
