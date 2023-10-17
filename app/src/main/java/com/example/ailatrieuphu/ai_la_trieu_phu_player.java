@@ -21,6 +21,8 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
     QuestionDao dao;
     TextView questions;
     Button dapana, dapanb, dapanc, dapand, stopPlayer;
+    TextView khangiaa, khangiab, khangiac, khangiad;
+    Button closeDialogKhanGia;
     QuestionModel ch;
     TextView cauhoithu;
     int cauhoi = 1;
@@ -52,6 +54,10 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         dapand = findViewById(R.id.dapand);
         cauhoithu = findViewById(R.id.cauhoi);
         stopPlayer = findViewById(R.id.btnStopPlayer);
+        khangiaa = findViewById(R.id.trogiupa);
+        khangiab = findViewById(R.id.trogiupb);
+        khangiac = findViewById(R.id.trogiupc);
+        khangiad = findViewById(R.id.trogiupd);
         btnHelpCall.setOnClickListener(this);
         btnChangeQuestion.setOnClickListener(this);
         btn5050.setOnClickListener(this);
@@ -75,7 +81,8 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         else if (R.id.btnStopPlayer == view.getId()) tambietluon();
         else if (R.id.helpDoiCauHoi == view.getId()) doicauhoi();
         else if (R.id.help5050 == view.getId()) help5050();
-        else if(R.id.helpCall == view.getId()) goidienthoai();
+        else if (R.id.helpCall == view.getId()) goidienthoai();
+        else if (R.id.helpKhanGia == view.getId()) openHelpKhanGia();
     }
 
     public void xuLyCauHoi(String da) {
@@ -233,8 +240,9 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
 
         }
     }
+
     public void goidienthoai() {
-        if(goi == true && traloi == true) {
+        if (goi == true && traloi == true) {
             goi = false;
             btnHelpCall.setImageResource(R.drawable.player_button_image_help_call_x);
             soundAnswer.helpCall();
@@ -262,19 +270,22 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     public void helpCall() {
+        player.startNen();
         String answer = "";
         int daTrue = ch.getTruecase();
-        if(daTrue == 1) answer = "A";
-        if(daTrue == 2) answer = "B";
-        if(daTrue == 3) answer = "C";
-        if(daTrue == 4) answer = "D";
+        if (daTrue == 1) answer = "A";
+        if (daTrue == 2) answer = "B";
+        if (daTrue == 3) answer = "C";
+        if (daTrue == 4) answer = "D";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Gọi điện thoại");
-        builder.setMessage("Bạn của bạn tư vấn cho bạn đáp án: "+ answer);
+        builder.setMessage("Bạn của bạn tư vấn cho bạn đáp án: " + answer);
 
         builder.setNegativeButton("Đóng", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+
                 dialog.dismiss();
             }
         });
@@ -304,6 +315,18 @@ public class ai_la_trieu_phu_player extends AppCompatActivity implements View.On
             if (i == 4) dapand.setVisibility(View.INVISIBLE);
             dem++;
         }
+    }
+
+    public void openHelpKhanGia() {
+        if (khangia == true && traloi == true) {
+            khangia = false;
+            btnAudience.setImageResource(R.drawable.player_button_image_help_audience_x);
+            soundAnswer.helpKhangia();
+        }
+    }
+
+    public void helpKhanGia() {
+        player.startNen();
     }
 }
 

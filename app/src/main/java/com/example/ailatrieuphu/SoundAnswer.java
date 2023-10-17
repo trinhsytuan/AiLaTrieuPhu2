@@ -132,4 +132,15 @@ public class SoundAnswer {
             }
         });
     }
+    public void helpKhangia() {
+        MediaPlayer trogiup = MediaPlayer.create(context, R.raw.khan_gia);
+        trogiup.start();
+        trogiup.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                player.helpKhanGia();
+            }
+        });
+
+    }
 }
